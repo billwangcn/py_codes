@@ -28,28 +28,6 @@ def isFlag(item):  # 检测是否有特殊点需要处理
         return True
     return False
 
-
-list0 = [(21, 78), (585, 244), (1102, 316), (113, 763), (243, 189), (668, 769)]
-
-# -1 is write price content.
-list3 = [(246, 199),
-         (641, 764),
-         (-1, -1),
-         (375, 44)]
-
-# 0 is pagedown flag.
-list2 = [(117, 779),
-         (0, 0),
-         (126, 218),
-         (127, 325),
-         (126, 461),
-         (124, 581),
-         (119, 710),
-         (0, 0),
-         (142, 267),
-         (134, 375),
-         (114, 502)]
-
 # 小本上网用
 list0101 = [(130, 670),
             (118, 780),
@@ -71,34 +49,34 @@ list0102 = [(242, 215),
             (0, 0),
             (473, 37)]
 # 发表观点
-list0201 = [(300, 141),
+list0201 = [(300, 121),
             (388, 306),
             (0, 0),
             (882, 410),
             (471, 39)]
 #
-list0300 = [[(199, 144),
+list0300 = [[(199, 124),
              (186, 521),
              (224, 223),
              (637, 600),
              (0, 0),
              (473, 39)],
 
-            [(199, 144),
+            [(199, 124),
              (186, 603),
              (224, 223),
              (637, 600),
              (0, 0),
              (473, 39)],
 
-            [(199, 144),
+            [(199, 124),
              (186, 692),
              (224, 223),
              (637, 600),
              (0, 0),
              (473, 39)],
 
-            [(199, 144),
+            [(199, 124),
              (186, 776),
              (224, 223),
              (637, 600),
@@ -107,12 +85,12 @@ list0300 = [[(199, 144),
 
 list0400=[
     (133, 115),
-(134, 364),
-(1036, 497),
-(272, 199),
-(625, 229),
-(0,0),
-(629, 38)
+    (134, 364),
+    (1036, 497),
+    (272, 199),
+    (625, 229),
+    (0,0),
+    (629, 38)
 ]
 
 
@@ -174,7 +152,8 @@ def toPartyView1():
             mclick(item)
         else:
             sstr = str(PVIEW[random.randint(0, 3)])
-            # for i in range(len(sstr)):            #     pg.typewrite(sstr[i:i+1],=0.1)
+            # for i in range(len(sstr)):            
+            #     pg.typewrite(sstr[i:i+1],=0.1)
             # sstr = str(PVIEW[random.randint(0, 1)]=2)
             # print(sstr)
             #pyperclip.copy(sstr)  # Frist Copy
@@ -229,26 +208,21 @@ def toAll():
         pg.hotkey('pageup')
 
     for i in range(3):
-        toPartyView1()
+        #toPartyView1()
+        #pass
 
-    toHeart(list0400)   
+    #toHeart(list0400)   
 
     for i in range(3):
         pg.hotkey('pageup')
 # 
     for l in list0300:
-        toTalk(l)
-    # 
+      toTalk(l)
+        #pass
+
+
 # 
 # time.sleep(2)
 toAll()
 
-# print(PVIEW[random.randint(0,3)])
-# print('//---------------------------------------------')
-# pg.typewrite(str(PVIEW[random.randint(0,3)]),interval=0.1)
-# print(PVIEW[random.randint(0,3)])
-# print('//---------------------------------------------')
 
-
-# print(pg.size())
-# print(pg.screenshot())
