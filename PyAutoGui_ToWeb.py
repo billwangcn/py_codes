@@ -1,3 +1,5 @@
+# encoding:utf8
+
 import pyautogui as pg
 import sys
 import time
@@ -28,7 +30,32 @@ def isFlag(item):  # 检测是否有特殊点需要处理
         return True
     return False
 
+
+list0 = [(21, 78), (585, 244), (1102, 316), (113, 763), (243, 189), (668, 769)]
+
+# -1 is write price content.
+list3 = [(246, 199),
+         (641, 764),
+         (-1, -1),
+         (375, 44)]
+
+# 0 is pagedown flag.
+list2 = [(117, 779),
+         (0, 0),
+         (126, 218),
+         (127, 325),
+         (126, 461),
+         (124, 581),
+         (119, 710),
+         (0, 0),
+         (142, 267),
+         (134, 375),
+         (114, 502)]
+
 # 小本上网用
+list0001 = [(1091, 341)]
+
+#
 list0101 = [(130, 670),
             (118, 780),
             (0, 0),
@@ -49,55 +76,55 @@ list0102 = [(242, 215),
             (0, 0),
             (473, 37)]
 # 发表观点
-list0201 = [(300, 121),
+list0201 = [(300, 141),
             (388, 306),
             (0, 0),
             (882, 410),
             (471, 39)]
-#发表动态
-list0300 = [[(199, 124),
+#
+list0300 = [[(199, 144),
              (186, 521),
              (224, 223),
              (637, 600),
              (0, 0),
              (473, 39)],
 
-            [(199, 124),
+            [(199, 144),
              (186, 603),
              (224, 223),
              (637, 600),
              (0, 0),
              (473, 39)],
 
-            [(199, 124),
+            [(199, 144),
              (186, 692),
              (224, 223),
              (637, 600),
              (0, 0),
              (473, 39)],
 
-            [(199, 124),
+            [(199, 144),
              (186, 776),
              (224, 223),
              (637, 600),
              (0, 0),
              (473, 39)]]
-#学习留言
-list0400=[
-    (133, 115),
-    (134, 364),
-    (1036, 497),
-    (272, 199),
-    (625, 229),
-    (0,0),
-    (629, 38)
-]
+
+list0401 = [(133, 143),
+            (136, 388),
+            (1000, 518),
+            (277, 227),
+            (706, 279),
+            (394, 291),
+            (0, 0),
+            (991, 430)]
 
 
 def toPrice():
     try:
         for item in list0:
             mclick(item)
+            time.sleep(INTERVAL)
             time.sleep(2)
     except KeyboardInterrupt:
         print('/n')
@@ -125,7 +152,8 @@ def toTitle():
         for item in list0101:
             if not isFlag(item):
                 mclick(item)
-                toWrite()
+                #toWrite()
+                toProletarian(list0102,KEYWORD[1])
             else:
                 pg.hotkey('pagedown')
             time.sleep(INTERVAL)
@@ -152,19 +180,18 @@ def toPartyView1():
             mclick(item)
         else:
             sstr = str(PVIEW[random.randint(0, 3)])
-            # for i in range(len(sstr)):            
-            #     pg.typewrite(sstr[i:i+1],=0.1)
+            # for i in range(len(sstr)):            #     pg.typewrite(sstr[i:i+1],=0.1)
             # sstr = str(PVIEW[random.randint(0, 1)]=2)
             # print(sstr)
-            #pyperclip.copy(sstr)  # Frist Copy
+            pyperclip.copy(sstr)  # 先复制
             # # pyperclip.copy()
-            #print(sstr)
-            #time.sleep(INTERVAL)
-            #pg.hotkey('ctrl', 'v')  # 再粘贴
+            print(sstr)
+            time.sleep(INTERVAL)
+            pg.hotkey('ctrl', 'v')  # 再粘贴
             # time.sleep(2)
             # pg.typewrite(sstr, interval=0.05)
-            pg.typewrite(PVIEW[random.randint(0, 3)])
-            pg.hotkey('ctrl', 'enter')
+            #pg.typewrite(PVIEW[random.randint(0, 3)])
+            # pg.hotkey('ctrl', 'enter')
         time.sleep(INTERVAL)
 
 
@@ -181,48 +208,51 @@ def toTalk(xlist):
             pg.hotkey('ctrl', 'enter')
 
 
-def toHeart(xlist):
-    for item in xlist:
-        if not isFlag(item):
-            mclick(item)
-            time.sleep(INTERVAL)
-        else:
-            pg.typewrite(PVIEW[random.randint(0, 3)][:200])
-            time.sleep(INTERVAL)
-            pg.hotkey('enter')
-            time.sleep(INTERVAL)
-            pg.hotkey('ctrl', 'enter')
-            time.sleep(INTERVAL)
-            pg.hotkey('ctrl', 'W')
-            time.sleep(INTERVAL)
-            pg.hotkey('enter')
-            
+def toProletarian(vlist, vstr):  #通用学习操作
+    try:
+        for item in vlist:
+            if not isFlag(item):
+                mclick(item)
+                time.sleep(INTERVAL)
+            else:
+                pg.typewrite(vstr)
+                time.sleep(INTERVAL)
+                pg.hotkey('enter')
+                time.sleep(INTERVAL)
+                pg.hotkey('ctrl', 'enter')
+    except KeyboardInterrupt:
+        # print('/n')
+        pass
+
 
 def toAll():
     for i in range(2):
         pg.hotkey('pageup')
 
-    #toTitle()
+    toProletarian(list0001, '') #签到
 
+    toTitle()
     for i in range(3):
         pg.hotkey('pageup')
 
     for i in range(3):
-        #toPartyView1()
-        #pass
-
-    #toHeart(list0400)   
+        # toPartyView()
+        toProletarian(list0401,PVIEW[random.randint(0,3)]) #发表党员视角
+        pass
 
     for i in range(3):
         pg.hotkey('pageup')
-# 
+
     for l in list0300:
-      toTalk(l)
-        #pass
+        # toTalk(l)
+        toProletarian(l,KEYWORD[1]) #发表互动
+        pass
+
+    toProletarian(list0401, PVIEW[random.randint(0, 3)])  # 发表学习留言
 
 
-# 
-# time.sleep(2)
+# start program
 toAll()
 
-
+# print(pg.size())
+# print(pg.screenshot())
